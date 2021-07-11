@@ -1,0 +1,179 @@
+% Colors
+\definecolor{pagebackground}{HTML}{FFFFFF}
+\definecolor{sidebarbackground}{HTML}{24272B}
+\definecolor{sidebartitle}{HTML}{FFFFFF}
+\definecolor{sidebartext}{HTML}{FFFFFF}
+\definecolor{bodytitle}{HTML}{24272B}
+\definecolor{bodytext}{HTML}{6c6c6d}
+\definecolor{accent}{HTML}{009ba6}
+\definecolor{linkcolor}{HTML}{009ba6}
+\definecolor{bulletcolor}{HTML}{24272B}
+\definecolor{linecolor}{HTML}{24272B}
+\definecolor{name}{HTML}{24272B}
+\definecolor{jobtitle}{HTML}{6c6c6d}
+\RequirePackage[pagecolor=pagebackground, nopagecolor=pagebackground]{pagecolor}
+
+% Heading styles
+\titleformat{\section}
+{\color{bodytitle}\fontsize{16pt}{16pt}\sffamily\addfontfeature{LetterSpace=2}\bfseries}
+{}{0pt}{\MakeUppercase}[{\color{linecolor}\titlerule[1pt]}]
+
+\titleformat{\subsection}
+{\color{sidebartitle}\fontsize{16pt}{16pt}\sffamily\addfontfeature{LetterSpace=2}\bfseries}
+{}{0pt}{\MakeUppercase}[{\color{sidebartitle}\titlerule[1pt]}]
+
+\titleformat{\subsubsection}
+{\color{bodytitle}\fontsize{12pt}{12pt}\sffamily\addfontfeature{LetterSpace=2}}
+{}{0pt}{}
+
+\titlespacing*{\section}{0pt}{0.5cm}{0.4cm}
+\titlespacing*{\subsection}{0pt}{0.5cm}{0.4cm}
+\titlespacing*{\subsubsection}{0pt}{0.5cm}{0.1cm}
+
+% Defining font styles
+\newcommand{\sname}{\color{name}\fontsize{40pt}{40pt}\sffamily\addfontfeature{LetterSpace=3}\bfseries\MakeUppercase}
+\newcommand{\sjobtitle}{\color{jobtitle}\fontsize{20pt}{20pt}\sffamily\addfontfeature{LetterSpace=5}\MakeUppercase}
+
+% Defining page styles
+\pagestyle{fancy}
+
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[C]{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \node [rectangle, fill=sidebarbackground, anchor=north east, minimum width=8cm, minimum height=\paperheight+2cm] at ($(current page.north east)+(1.05cm,1cm)$) {};
+    \end{tikzpicture}
+}
+
+% Layout for name, job title and sidebar
+\setcolumnwidth{12cm,5cm}
+\setlength{\columnsep}{1.5cm}
+\columncolor{sidebartext}[1]
+\columncolor{bodytext}[0]
+
+
+
+\newcommand{\makeprofile}{
+%    \vspace*{-1.5cm}
+    {\setstretch{3}
+    \begin{adjustbox}{minipage=[c][2.5cm]{12cm}}
+        {\sname\name}
+    \end{adjustbox}}
+
+    {\setstretch{1.8}
+    \begin{adjustbox}{minipage=[c][1.5cm]{12cm}}
+        {\sjobtitle\jobtitle}
+    \end{adjustbox}}
+    \medskip
+    \ifthenelse{\equal{\profilepic}{}}{}{
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[circle,minimum height=4cm,minimum width=4cm, path picture={
+                \node at (path picture bounding box.center){\includegraphics[width=4cm]{\profilepic}};}] at ($(current page.north east)-(3.5cm,3cm)$) {};
+        \end{tikzpicture}
+    }
+}
+
+% Margins
+\RequirePackage[left=1cm, right=1cm, top=1.5cm, bottom=1.5cm, footskip=0.5cm, headheight=0.5cm]{geometry}
+
+% Personal skills bar
+\newcommand\perskills[1]{
+    \ifthenelse{\equal{#1}{}}{\booltrue{perempty}}{\renewcommand{\perskills}{%
+        \foreach [count=\i] \x/\y in {#1}{
+            {\x}\\
+            \ifthenelse{\equal{\thecolumn}{0}}{
+                \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=sidebartext, filledcolor=sidebarbackground, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
+                }{
+                \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=bodytext, filledcolor=bodytext, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
+            }
+        }
+    }}
+}
+
+% Professional skills bar
+\newcommand\proskills[1]{
+    \ifthenelse{\equal{#1}{}}{\booltrue{proempty}}{\renewcommand{\proskills}{%
+        \foreach [count=\i] \x/\y in {#1}{
+            {\x}\\
+            \ifthenelse{\equal{\thecolumn}{0}}{
+                \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0,
+                heightr=1, linecolor=sidebartext, filledcolor=sidebarbackground, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
+                }{
+                \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=bodytext, filledcolor=bodytext, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
+            }
+        }
+    }}
+}
+
+% Command for drawing language skill circles
+% Adapted from AltaCV Template: https://www.overleaf.com/latex/templates/altacv-template/trgqjpwnmtgv
+\newcommand\langskills[1]{%
+    \ifthenelse{\equal{#1}{}}{\booltrue{langempty}}{\renewcommand{\langskills}{%
+        \renewcommand{\arraystretch}{1.4}
+        \foreach [count=\i] \x/\y in {#1}{%
+            \begin{tabular*}{\columnwidth}{@{}L{.4\columnwidth}L{.6\columnwidth}}
+                {\x} &
+                \foreach \z in {1,...,5}{%
+                    {\ifnumgreater{\z}{\y}{\color{bodytext!30}}{\color{bodytext}}\small{\faCircle}}}\\
+            \end{tabular*}
+        }
+    }}
+}
+
+% Adaptet from AltaCV https://github.com/liantze/AltaCV/blob/6b54c51acbac8dc05ed1086071a22ae43960efc3/altacv.cls
+\newcommand{\ratingmarker}{\small\faCircle}
+\RequirePackage{trimclip}
+\RequirePackage{accsupp}
+
+\newcommand{\cvskill}[2]{%
+  \textcolor{sidebartext}{\textbf{#1}}\hfill
+  \BeginAccSupp{method=plain,ActualText={#2}}
+  \foreach \x in {1,...,5}{%
+    \ifdimequal{\x pt - #2 pt}{0.5pt}%
+    {\clipbox*{0pt -0.25ex {.5\width} {\totalheight}}{\color{accent}\ratingmarker}%
+     \clipbox*{{.5\width} -0.25ex {\width} {\totalheight}}{\color{sidebartext}\ratingmarker}}
+    {\ifdimgreater{\x bp}{#2 bp}{\color{sidebartext}}{\color{accent}}\ratingmarker}%
+  }\EndAccSupp{}\par%
+}
+
+% Adapted from AltaCV https://github.com/liantze/AltaCV/blob/6b54c51acbac8dc05ed1086071a22ae43960efc3/altacv.cls
+\newcommand{\cvevent}[4]{%
+  {\large\color{bodytext}#1\par}
+  \normalsize
+  \ifstrequal{#2}{}{}{
+  \textbf{\color{accent}#2}\par
+  }
+  \ifstrequal{#3}{}{}{{\small\makebox[0.5\linewidth][l]{\calendaricon~#3}}}%
+  \ifstrequal{#4}{}{}{{\small\makebox[0.5\linewidth][l]{\locicon~#4}}}\par
+  \normalsize
+}
+
+% Adapted from AltaCV https://github.com/liantze/AltaCV/blob/6b54c51acbac8dc05ed1086071a22ae43960efc3/altacv.cls
+\RequirePackage{dashrule}
+\newcommand{\divider}{\textcolor{bodytext}{\hdashrule[0.5ex]{\linewidth}{0.6pt}{0.5ex}}}
+
+% Adapted from AltaCV https://github.com/liantze/AltaCV/blob/6b54c51acbac8dc05ed1086071a22ae43960efc3/altacv.cls
+\newcommand{\cvtag}[1]{%
+  \tikz[baseline]\node[anchor=base,draw=accent,rounded corners,inner xsep=1ex,inner ysep=0.75ex,text height=1.5ex,text depth=.25ex]{\color{sidebartext}#1};
+}
+
+% Adapted from AltaCV https://github.com/liantze/AltaCV/blob/6b54c51acbac8dc05ed1086071a22ae43960efc3/altacv.cls
+\newcommand{\cvachievement}[3]{%
+  \begin{tabularx}{\linewidth}{@{}p{2em} @{\hspace{1ex}} >{\raggedright\arraybackslash}X@{}}
+  \multirow{2}{*}{\Large\color{sidebartext}#1} & \bfseries\textcolor{accent}{#2}\\
+  & \small \itshape #3
+  \end{tabularx}%
+  \smallskip
+}
+
+
+\setlength{\parindent}{0pt}
+
+\newcommand{\itemmarker}{\raisebox{0.4ex}{\tiny$\bullet$}}
+
+
+% Bullet style and spacing
+\setlist[itemize,1]{leftmargin=*,label={\color{bulletcolor}\itemmarker},parsep=0pt,labelindent=0pt}
+\setlist[itemize,2]{leftmargin=*,label={\color{bulletcolor}\itemmarker},parsep=0pt,labelindent=0pt}
+\setlist[itemize,3]{leftmargin=*,label={\color{bulletcolor}\itemmarker},parsep=0pt,labelindent=0pt}

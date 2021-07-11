@@ -17,6 +17,9 @@
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw-right}}}{%
     	\booltrue{reverse}
         \input{cv-themes/bw-right.tex}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{exige}}}{%
+    	\booltrue{reverse}
+        \input{cv-themes/exige.tex}}{}
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{gray}}}{%
         \input{cv-themes/gray.tex}}{}
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{minimal}}}{%
@@ -47,13 +50,13 @@
 \RequirePackage[final]{microtype}
 \RequirePackage{fontspec}
 \setmainfont[Path= fonts/,
-    BoldFont = NunitoSans-SemiBold.ttf,
-    ItalicFont = NunitoSans-Italic.ttf]
-{NunitoSans-Regular.ttf}
+    BoldFont = FiraSans-SemiBold.ttf,
+    ItalicFont = FiraSans-Italic.ttf]
+{FiraSans-Regular.ttf}
 
 \setsansfont[Path= fonts/,
-    BoldFont = Archivo-SemiBold.ttf]
-{Archivo-Regular.ttf}
+    BoldFont = FiraSans-SemiBold.ttf]
+{FiraSans-Regular.ttf}
 
 %----------------------------------------------------------------------------------------
 %	 PACKAGES
@@ -84,7 +87,7 @@
 
 \pagestyle{empty}
 \setlength{\parindent}{0pt} % Disable paragraph indentation
-\setlength{\parskip}{6pt} % Space between paragraphs
+\setlength{\parskip}{5pt} % Space between paragraphs
 \emergencystretch 3em
 
 % Graphics directories
@@ -211,11 +214,6 @@
     {\color{bodytext}{\ifthenelse{\isempty{#2}}{\sitemtit{#1}}{\sitemtit{#1 | #2}}}}\par
     {}
 }
-
-% Bullet style and spacing
-\setlist[itemize,1]{label={\color{bulletcolor}$\bullet$},parsep=6pt,labelindent=12pt}
-\setlist[itemize,2]{label={\color{bulletcolor}$\bullet$},parsep=6pt,labelindent=12pt}
-\setlist[itemize,3]{label={\color{bulletcolor}$\bullet$},parsep=6pt,labelindent=12pt}
 
 % Command for drawing professional and personal skills
 \newcommand\skillsbars[2]{%
