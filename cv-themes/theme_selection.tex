@@ -14,6 +14,9 @@
 \newcommand{\theme}[1]{
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw}}}{%
         \input{cv-themes/bw.tex}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw-right}}}{%
+    	\booltrue{reverse}
+        \input{cv-themes/bw-right.tex}}{}
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{gray}}}{%
         \input{cv-themes/gray.tex}}{}
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{minimal}}}{%

@@ -12,6 +12,8 @@
 \newcommand{\theme}[1]{
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw}}}{%
         \input{cover-letter-themes/bw.tex}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw-right}}}{%
+        \input{cover-letter-themes/bw-right.tex}}{}
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{gray}}}{%
         \input{cover-letter-themes/gray.tex}}{}
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{minimal}}}{%
