@@ -134,8 +134,9 @@
     {\clipbox*{0pt -0.25ex {.5\width} {\totalheight}}{\color{accent}\ratingmarker}%
      \clipbox*{{.5\width} -0.25ex {\width} {\totalheight}}{\color{sidebartext}\ratingmarker}}
     {\ifdimgreater{\x bp}{#2 bp}{\color{sidebartext}}{\color{accent}}\ratingmarker}%
-  }\EndAccSupp{}\par%
+  }\EndAccSupp{}\\%
 }
+
 
 % Adapted from AltaCV https://github.com/liantze/AltaCV/blob/6b54c51acbac8dc05ed1086071a22ae43960efc3/altacv.cls
 \newcommand{\cvevent}[4]{%
@@ -164,7 +165,6 @@
   \multirow{2}{*}{\Large\color{sidebartext}#1} & \bfseries\textcolor{accent}{#2}\\
   & \small \itshape #3
   \end{tabularx}%
-  \smallskip
 }
 
 
