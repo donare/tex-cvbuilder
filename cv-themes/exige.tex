@@ -159,15 +159,6 @@
   \tikz[baseline]\node[anchor=base,draw=accent,rounded corners,inner xsep=1ex,inner ysep=0.75ex,text height=1.5ex,text depth=.25ex]{\color{sidebartext}#1};
 }
 
-% Adapted from AltaCV https://github.com/liantze/AltaCV/blob/6b54c51acbac8dc05ed1086071a22ae43960efc3/altacv.cls
-\newcommand{\cvachievement}[3]{%
-  \begin{tabularx}{\linewidth}{@{}p{2em} @{\hspace{1ex}} >{\raggedright\arraybackslash}X@{}}
-  \multirow{2}{*}{\Large\color{sidebartext}#1} & \bfseries\textcolor{accent}{#2}\\
-  & \small \itshape #3
-  \end{tabularx}%
-}
-
-
 \setlength{\parindent}{0pt}
 
 \newcommand{\itemmarker}{\raisebox{0.4ex}{\tiny$\bullet$}}
