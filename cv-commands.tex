@@ -1,0 +1,15 @@
+% Contact
+\newcommand{\makecontact}[1]{%
+    \ifboolexpr{bool {altcont}}{}{%
+        \subsection{#1}
+
+        \renewcommand{\arraystretch}{1.2}
+        \begin{tabular}[t]{@{}Y{.08\columnwidth} @{\hskip 0.05\columnwidth}p{0.85\columnwidth}}
+            \ifthenelse{\equal{\location}{}}{}{\locicon & \location \\ }
+            \ifthenelse{\equal{\phone}{}}{}{\phoneicon & \phone \\ }
+            \ifthenelse{\equal{\mail}{}}{}{\mailicon & \href{mailto:\mail}{\mail} }
+            \ifthenelse{\equal{\linkedin}{}}{}{\\ \linkedinicon & \linkedin }
+            \ifthenelse{\equal{\github}{}}{}{\\ \githubicon & \github \\ }
+        \end{tabular}
+    }
+}

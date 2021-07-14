@@ -12,6 +12,9 @@
 \newbool{reverse}
 
 \newcommand{\cvtheme}[1]{
+	\input{cv-commands.tex}
+
+
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw}}}{%
         \input{cv-themes/bw.tex}}{}
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw-right}}}{%
@@ -158,10 +161,13 @@
 \newcommand{\dateofbirth}[1]{\renewcommand{\dateofbirth}{#1}}
 \newcommand{\profilepic}[1]{\renewcommand{\profilepic}{#1}}
 
+\newcommand{\employerinfo}[1]{\renewcommand{\employerinfo}{#1}}
+\newcommand{\letterspace}{\vspace*{\baselineskip}}
 \newcommand{\makeemployerinfo}{\ifthenelse{\equal{\employerinfo}{}}{}{%
     \employerinfo
     \letterspace
 }}
+
 \newcommand{\makeabout}{\ifthenelse{\equal{\aboutdesc}{}}{}{\aboutdesc}}
 \newcommand{\makedob}{\ifthenelse{\equal{\dateofbirth}{}}{}{\dateofbirth}}
 \newcommand{\makelicense}{\ifthenelse{\equal{\drivinglicenses}{}}{}{\drivinglicenses}}
@@ -209,22 +215,6 @@
     \sitemtit{\multirow{3}{*}{#1}} & Understanding & {#2} \\
     & Speaking & {#3} \\
     & Writing & {#4} \\
-}
-
-% Contact table
-\newcommand{\makecontact}[1]{%
-    \ifboolexpr{bool {altcont}}{}{%
-        \subsection{#1}
-
-        \renewcommand{\arraystretch}{1.2}
-        \begin{tabular}[t]{@{}Y{.08\columnwidth} @{\hskip 0.05\columnwidth}p{0.85\columnwidth}}
-            \ifthenelse{\equal{\location}{}}{}{\locicon & \location \\ }
-            \ifthenelse{\equal{\phone}{}}{}{\phoneicon & \phone \\ }
-            \ifthenelse{\equal{\mail}{}}{}{\mailicon & \href{mailto:\mail}{\mail} }
-            \ifthenelse{\equal{\linkedin}{}}{}{\\ \linkedinicon & \linkedin }
-            \ifthenelse{\equal{\github}{}}{}{\\ \githubicon & \github \\ }
-        \end{tabular}
-    }
 }
 
 % Achievements
